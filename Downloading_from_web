@@ -1,0 +1,17 @@
+from urllib import request
+
+dest= "https://query1.finance.yahoo.com/v7/finance/download/CALIX?period1=1524473269&period2=1527065269&interval=1d&events=history&crumb=A/R6iXIW7cT"
+
+def download_csv(csv_url):
+    connect= request.urlopen(csv_url)
+    csv= connect.read()
+    csv_str=str(csv)
+    lines= csv_str.split("\\n")
+    dest_url=r"yahoo.csv"
+    fw= open(dest_url, "w")
+    for lines in lines:
+        fw.write(lines + "\n")
+        fw.close()
+
+
+download_csv(dest)
